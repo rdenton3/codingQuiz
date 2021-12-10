@@ -1,0 +1,13 @@
+.intro {
+    margin-left: auto;
+    margin-right: auto;
+    width: 38em;
+    text-align: center;
+    font-size: larger;
+}
+
+.intro-btn {
+    height: 25px;
+    width: 200px;
+}
+
