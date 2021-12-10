@@ -1,6 +1,11 @@
 introBtnEl = document.querySelector(".intro-btn");
 introPage = document.querySelector(".intro-page");
 timerEl = document.querySelector("#showTimer")
+questionEl = document.querySelector(".quiz-question")
+answerOneEl = document.querySelector("#btn1")
+answerTwoEl = document.querySelector("#btn2")
+answerThreeEl = document.querySelector("#btn3")
+answerFourEl = document.querySelector("#btn4")
 
 // set a timer function
 function timer() {
@@ -21,7 +26,43 @@ function timer() {
 }
 
 function startQuiz() {
-    // first need the intro page to disappear
+    var quizQuestions = [
+        {
+            question: "What is your first name?",
+            answers: {
+                a: "Tammy",
+                b: "Patricia",
+                c: "Bob",
+                d:"Ellicott"
+            },
+            correct: "a"
+        },
+        {
+            question: "What is your last name?",
+            answers: {
+                a: "Smith",
+                b: "Frank",
+                c: "B",
+                d:"Ell"
+            },
+            correct: "b"
+        },
+
+    ]
+    questionEl.textContent = "Question one: What si your first name?"
+    answerOneEl.textContent = "Leo"
+    answerTwoEl.textContent = "Todd"
+    answerThreeEl.textContent = "Mary"
+    answerFourEl.textContent = "Jane"
+
+
+    // for (i=0; i<quizQuestions.length; i++) {
+    //     questionEl.textContent = quizQuestions[i].question; 
+    //     answerOneEl.textContent = quizQuestions[i].answers.a;
+    //     answerTwoEl.textContent = quizQuestions[i].answers.b;
+    //     answerThreeEl.textContent = quizQuestions[i].answers.c;
+    //     answerFourEl.textContent = quizQuestions[i].answers.d;
+    // }
 
 
 }
