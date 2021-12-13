@@ -11,10 +11,9 @@ resultEl = document.querySelector(".answer-result")
 
 // hide quiz questions in the beginning
 // mainPageEl.style.display = "none";
-
+var timeLeft = 90;
 // set a timer function
 function timer() {
-    var timeLeft = 10;
     introPage.style.display = "none";
     // show main page
     mainPageEl.style.display
@@ -75,52 +74,36 @@ function startQuiz(q) {
     answerFourEl.value = quizQuestions[q].answers[3].isCorrect;
     
     var selected = "";
-    // when option is clicked, set the selected answer equal to that option
-    answerOneEl.addEventListener("click", function(){
-        selected = answerOneEl.value
-        if (selected == true) {
+    // evaluate if selected answer is correct
+    function evaluate () {
+        if (selected == "true") {
             resultEl.textContent = "Correct"
+            score++
+            console.log(score)
         }
         else {
             resultEl.textContent = "Wrong"
+            timeLeft = timeLeft - 10
         }
+    }
+    // once option is clicked, move onto next question
+    // when option is clicked, evaluate whether the answer is right or wrong and move on to next question
+    answerOneEl.addEventListener("click", function(){
+        selected = answerOneEl.value
+        evaluate();
     })
     answerTwoEl.addEventListener("click", function(){
         selected = answerTwoEl.value
-        if (selected == true) {
-            resultEl.textContent = "Correct"
-        }
-        else {
-            resultEl.textContent = "Wrong"
-        }
+        evaluate();
     })
     answerThreeEl.addEventListener("click", function(){
         selected = answerThreeEl.value
-        if (selected == true) {
-            resultEl.textContent = "Correct"
-        }
-        else {
-            resultEl.textContent = "Wrong"
-        }
+        evaluate();
     })
     answerFourEl.addEventListener("click", function(){
         selected = answerFourEl.value
-        if (selected == true) {
-            resultEl.textContent = "Correct"
-        }
-        else {
-            resultEl.textContent = "Wrong"
-        }
+        evaluate();
     })
-    console.log(selected)
-    // if (selected == true) {
-    //     resultEl.textContent = "Correct"
-    // }
-    // else {
-    //     resultEl.textContent = "Wrong"
-    // }
-
-
 }
 
 
