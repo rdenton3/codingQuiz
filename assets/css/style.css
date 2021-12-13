@@ -6,7 +6,7 @@
     font-size: larger;
 }
 
-.intro-btn {
+.intro-btn, .btn {
     height: 25px;
     width: 200px;
 }
@@ -17,5 +17,11 @@
     right: 40px;
     width: 100px;
     text-align: right;
+}
+
+.quiz-questions button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
