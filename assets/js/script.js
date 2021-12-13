@@ -7,6 +7,7 @@ answerOneEl = document.querySelector("#btn1")
 answerTwoEl = document.querySelector("#btn2")
 answerThreeEl = document.querySelector("#btn3")
 answerFourEl = document.querySelector("#btn4")
+resultEl = document.querySelector(".answer-result")
 
 // hide quiz questions in the beginning
 // mainPageEl.style.display = "none";
@@ -58,26 +59,66 @@ var quizQuestions = [
 
 // referenced site https://www.geeksforgeeks.org/how-to-create-a-simple-javascript-quiz/
 function startQuiz(q) {
-
-    // questionEl.textContent = "Question one: What is your first name?"
-    // answerOneEl.textContent = "a. Leo"
-    // answerTwoEl.textContent = "b. Todd"
-    // answerThreeEl.textContent = "c. Mary"
-    // answerFourEl.textContent = "d. Jane"
-
-    // var firstAns = "d. Jane"
-
+    // set a starting score of 0
     var score = 0
+    // set the question and answers equal to options in questions array
     questionEl.textContent = quizQuestions[q].question; 
     answerOneEl.textContent = quizQuestions[q].answers[0].opt;
     answerTwoEl.textContent = quizQuestions[q].answers[1].opt;
     answerThreeEl.textContent = quizQuestions[q].answers[2].opt;
     answerFourEl.textContent = quizQuestions[q].answers[3].opt;
 
-    console.log(q)
-    console.log(quizQuestions[q].answers[0])
-    console.log(quizQuestions[q].answers[0].opt)
-
+    // set value to see if answer is correct or incorrect
+    answerOneEl.value = quizQuestions[q].answers[0].isCorrect;
+    answerTwoEl.value = quizQuestions[q].answers[1].isCorrect;
+    answerThreeEl.value = quizQuestions[q].answers[2].isCorrect;
+    answerFourEl.value = quizQuestions[q].answers[3].isCorrect;
+    
+    var selected = "";
+    // when option is clicked, set the selected answer equal to that option
+    answerOneEl.addEventListener("click", function(){
+        selected = answerOneEl.value
+        if (selected == true) {
+            resultEl.textContent = "Correct"
+        }
+        else {
+            resultEl.textContent = "Wrong"
+        }
+    })
+    answerTwoEl.addEventListener("click", function(){
+        selected = answerTwoEl.value
+        if (selected == true) {
+            resultEl.textContent = "Correct"
+        }
+        else {
+            resultEl.textContent = "Wrong"
+        }
+    })
+    answerThreeEl.addEventListener("click", function(){
+        selected = answerThreeEl.value
+        if (selected == true) {
+            resultEl.textContent = "Correct"
+        }
+        else {
+            resultEl.textContent = "Wrong"
+        }
+    })
+    answerFourEl.addEventListener("click", function(){
+        selected = answerFourEl.value
+        if (selected == true) {
+            resultEl.textContent = "Correct"
+        }
+        else {
+            resultEl.textContent = "Wrong"
+        }
+    })
+    console.log(selected)
+    // if (selected == true) {
+    //     resultEl.textContent = "Correct"
+    // }
+    // else {
+    //     resultEl.textContent = "Wrong"
+    // }
 
 
 }
@@ -87,3 +128,4 @@ function startQuiz(q) {
 introBtnEl.addEventListener("click", timer);
 // when intro button is clicked, run the quiz function
 introBtnEl.addEventListener("click",startQuiz(0));
+// when any answer button is clicked, evaluate whether or not correct answer was chosen
