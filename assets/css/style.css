@@ -1,4 +1,4 @@
-.intro, .quiz-questions {
+.intro, .quiz-questions, .score-page {
     margin-left: auto;
     margin-right: auto;
     width: 38em;
@@ -19,14 +19,36 @@
     text-align: right;
 }
 
-.quiz-questions button {
+.viewHighScores {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    width: 200px;
+    text-align: left;
+}
+
+.quiz-questions {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .btn {
+    height: 40px;
+    width: 300px;
     margin-top: 10px;
-    margin-left: 250px;
+    /* margin-left: 250px; */
+    justify-content: center;
+    background-color: pink;
 }
+
+.answer-result {
+    margin-top: 10px;
+    font-size: larger;
+}
+
+.btn:hover {
+    background-color: coral;
+}
+
 

@@ -8,15 +8,24 @@ answerTwoEl = document.querySelector("#btn2")
 answerThreeEl = document.querySelector("#btn3")
 answerFourEl = document.querySelector("#btn4")
 resultEl = document.querySelector(".answer-result")
+scoreEl = document.querySelector(".score-page")
+initialsEl = document.querySelector(".initials")
+submitEl = document.querySelector(".submit")
+viewHighScoresEl = document.querySelector(".viewHighScores")
 
-// hide quiz questions in the beginning
-// mainPageEl.style.display = "none";
+// hide quiz questions and score page in the beginning
+mainPageEl.style.display = "none";
+initialsEl.style.display = "none";
+
+// set a starting score of 0
+var score = 0
+
 var timeLeft = 90;
 // set a timer function
 function timer() {
     introPage.style.display = "none";
     // show main page
-    mainPageEl.style.display
+    mainPageEl.style.display = "block"
 
 
     var timeInterval = setInterval(function() {
@@ -26,6 +35,9 @@ function timer() {
         }
         else {
         timerEl.textContent = "Time's Up!"
+        mainPageEl.style.display = "none";
+        initialsEl.style.display = "inline"
+        scoreEl.textContent = "You have finished the quiz with a score of " + score + ". Please enter your initials:"
         clearInterval(timeInterval);
         }
       }, 1000);
@@ -44,22 +56,61 @@ var quizQuestions = [
         q: 0
     },
     {
-        question: "Which notation is used to index an array",
+        question: "Which notation is used to index an array?",
         answers: [
-            {opt: "[]", isCorrect: true},
-            {opt: "<>", isCorrect: false},
-            {opt: "()", isCorrect: false},
+            {opt: "[ ]", isCorrect: true},
+            {opt: "< >", isCorrect: false},
+            {opt: "( )", isCorrect: false},
             {opt: "select", isCorrect: false},
         ],
         q: 1
     },
+    {
+        question: "A loop that never ends is called a(n) ...?",
+        answers: [
+            {opt: "For loop", isCorrect: false},
+            {opt: "While loop", isCorrect: false},
+            {opt: "If-else ", isCorrect: false},
+            {opt: "Infinite loop", isCorrect: true},
+        ],
+        q: 2
+    },
+    {
+        question: "Which option is the proper way to call a class with class name 'btn-select' using querySelector in JavaScript?",
+        answers: [
+            {opt: ".querySelector(#btn-select)", isCorrect: false},
+            {opt: "document.querySelector(.btn-select)", isCorrect: true},
+            {opt: ".querySelector[#btn-select]", isCorrect: false},
+            {opt: "document.querySelector[].btn-select]", isCorrect: false},
+        ],
+        q: 3
+    },
+    {
+        question: "Which third party API is used to streamline CSS code?",
+        answers: [
+            {opt: "jQuery", isCorrect: false},
+            {opt: "Bootstrap", isCorrect: true},
+            {opt: "Flexbox", isCorrect: false},
+            {opt: "HTML", isCorrect: false},
+        ],
+        q: 4
+    },
 
 ]
 
+// handle the high score page 
+// function highScores() {
+//     mainPageEl.style.display = "none";
+//     initialsEl.style.display = "inline"
+//     scoreEl.textContent = "You have finished the quiz with a score of " + score + ". Please enter your initials:"
+//     var initial = document.querySelector("input[name='user-initials']").value;
+//     var score = score;
+//     console.log(initial)
+//     console.log(score)
+    
+// }
 // referenced site https://www.geeksforgeeks.org/how-to-create-a-simple-javascript-quiz/
 function startQuiz(q) {
-    // set a starting score of 0
-    var score = 0
     // set the question and answers equal to options in questions array
     questionEl.textContent = quizQuestions[q].question; 
     answerOneEl.textContent = quizQuestions[q].answers[0].opt;
@@ -78,37 +129,103 @@ function startQuiz(q) {
     function evaluate () {
         if (selected == "true") {
             resultEl.textContent = "Correct"
+            resultEl.style.color = "green"
             score++
-            console.log(score)
         }
         else {
             resultEl.textContent = "Wrong"
+            resultEl.style.color = "red"
             timeLeft = timeLeft - 10
+        }
+    }
+
+    // function to define what to do when option is clicked 
+
+    function one() {
+        selected = answerOneEl.value
+        evaluate();
+        nextQuestion();
+    }
+    function two() {
+        selected = answerTwoEl.value
+        evaluate();
+        nextQuestion();
+    }
+    function three() {
+        selected = answerThreeEl.value
+        evaluate();
+        nextQuestion();
+    }
+    function four() {
+        selected = answerFourEl.value
+        evaluate();
+        nextQuestion();
+    }
+    
+    // once answer is selected, move on to next question
+    function nextQuestion () {
+        // remove event listeners 
+        answerOneEl.removeEventListener("click", one)
+        answerTwoEl.removeEventListener("click", two)
+        answerThreeEl.removeEventListener("click", three)
+        answerFourEl.removeEventListener("click", four)
+
+        if (q<4) {
+            q++
+            startQuiz(q)
+        }
+        // // if timer reaches 0, then quiz is over
+        // else if (timeLeft) {
+        // mainPageEl.style.display = "none";
+        // initialsEl.style.display = "inline"
+        // scoreEl.textContent = "You have finished the quiz with a score of " + score + ". Please enter your initials:"
+        // }
+        // else quiz is over and take you to the high score page
+        else {
+        mainPageEl.style.display = "none";
+        initialsEl.style.display = "inline"
+        scoreEl.textContent = "You have finished the quiz with a score of " + score + ". Please enter your initials:"
         }
     }
     // once option is clicked, move onto next question
     // when option is clicked, evaluate whether the answer is right or wrong and move on to next question
-    answerOneEl.addEventListener("click", function(){
-        selected = answerOneEl.value
-        evaluate();
-    })
-    answerTwoEl.addEventListener("click", function(){
-        selected = answerTwoEl.value
-        evaluate();
-    })
-    answerThreeEl.addEventListener("click", function(){
-        selected = answerThreeEl.value
-        evaluate();
-    })
-    answerFourEl.addEventListener("click", function(){
-        selected = answerFourEl.value
-        evaluate();
-    })
+    answerOneEl.addEventListener("click", one)
+    answerTwoEl.addEventListener("click", two)
+    answerThreeEl.addEventListener("click", three)
+    answerFourEl.addEventListener("click", four)
 }
 
+// when user submits their initals, save into local storage
+function submit() {
+    var userInitials = document.querySelector("input[name='user-initials']").value;
 
+    // check if inputs are empty (validate)
+    if (!userInitials) {
+    alert("Please enter your initials");
+    return false;
+    }
+  
+    //check if high scores already exist, else create an array
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || []
+    // put new score into an object
+    var newHighScore = {initials: userInitials, score: score}
+    // push object into an array
+    highScores.push(newHighScore)
+    // save to local storage
+    localStorage.setItem("highScores", JSON.stringify(highScores))
+
+}
+
+// show high scores page
+function showHighScores() {
+    var savedScores = localStorage.getItem("highScores");
+}
 // when intro button is clicked, begin the timer
 introBtnEl.addEventListener("click", timer);
 // when intro button is clicked, run the quiz function
 introBtnEl.addEventListener("click",startQuiz(0));
-// when any answer button is clicked, evaluate whether or not correct answer was chosen
+// when submit button is selected save initials and take user to high score page
+submitEl.addEventListener("click", submit);
+// after submit button is selected, take uer to view high score page
+submitEl.addEventListener("click", showHighScores)
+viewHighScoresEl.addEventListener("click", showHighScores)

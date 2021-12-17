@@ -6,6 +6,7 @@
     <title>Coding Quiz</title>
   </head>
   <body>
+    <!-- intro page -->
     <header class="intro">
         <div class = "intro-page">
             <h1>
@@ -21,6 +22,10 @@
         <p id="showTimer">
             Timer: 0
         </p>
+        <button class="viewHighScores">
+            View High Scores
+        </button>
+    <!-- quiz questions -->
     </header>
     <main class="quiz-questions">
         <h2 class="quiz-question"></h2>
@@ -31,9 +36,23 @@
             <button class = "btn" id="btn4"></button>
         </div>
         <p class="answer-result">
-
         </p>
     </main>
+    <!-- page for user to enter in initials -->
+    <form class="initials">
+    <p class="score-page">
+    </p>
+    <input type="text" name="user-initials" placeholder="Enter Your Initials" />
+    <button class="submit">Submit</button>
+    </form>
+    <!-- page to display high scores -->
+    <section class="show-scores">
+        <p class="scores-view">
+            
+        </p>
+    </section>
+
+
     <script src="./assets/js/script.js"></script>
   </body>
   </html>
