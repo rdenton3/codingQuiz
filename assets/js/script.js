@@ -12,6 +12,7 @@ scoreEl = document.querySelector(".score-page")
 initialsEl = document.querySelector(".initials")
 submitEl = document.querySelector(".submit")
 viewHighScoresEl = document.querySelector(".viewHighScores")
+viewScoresEl = document.querySelector(".show-scores")
 
 // hide quiz questions and score page in the beginning
 mainPageEl.style.display = "none";
@@ -219,13 +220,35 @@ function submit() {
 // show high scores page
 function showHighScores() {
     var savedScores = localStorage.getItem("highScores");
+    console.log(savedScores)
+    // parse into array of objects
+    savedScores = JSON.parse(savedScores);
+    console.log(savedScores)
+    mainPageEl.style.display = "none";
+    introPage.style.display = "none";
+    initialsEl.style.display = "none"
+    // create ul element
+    var ol = document.createElement('ol');
+    ol.setAttribute('style', 'padding: 0; margin: 0;');
+
+    for (var i= 0; i < savedScores.length; i++) {
+        var li = document.createElement('li');
+        li.textContent += "Initials: " + savedScores[i].initials + "  High Score: " + savedScores[i].score
+        li.setAttribute('style', 'text-align: center')
+        ol.appendChild(li)
+        // ul.setAttribute('style', 'text-align: center', 'display: block')
+    }
+    viewScoresEl.appendChild(ol)
 }
+
 // when intro button is clicked, begin the timer
 introBtnEl.addEventListener("click", timer);
 // when intro button is clicked, run the quiz function
 introBtnEl.addEventListener("click",startQuiz(0));
 // when submit button is selected save initials and take user to high score page
 submitEl.addEventListener("click", submit);
+// when submit button is clicked, take user to show high score page
+submitEl.addEventListener("click", showHighScores);
 // after submit button is selected, take uer to view high score page
 submitEl.addEventListener("click", showHighScores)
 viewHighScoresEl.addEventListener("click", showHighScores)
