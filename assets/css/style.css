@@ -55,9 +55,11 @@
     font-size: larger;
 }
 
-.btn:hover {
+
+.viewHighScores:hover, .intro-btn:hover, .btn:hover, .submit:hover {
     background-color: coral;
 }
+
 
 .scores-view {
     text-align: center;
